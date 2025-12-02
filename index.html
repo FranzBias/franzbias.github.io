@@ -5,7 +5,7 @@
   <title>FranzBias Home - GitHub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="author" content="FranzBias (Francesco Bianchi)" />
-  <meta name="description" content="Portfolio of FranzBias – Linux, Python, automation and small tools for everyday life." />
+  <meta name="description" content="Portfolio of FranzBias – Linux, Python, automation, tools and creative writing." />
   <link rel="icon" type="image/png" href="imgfittizia.png" />
 
   <style>
@@ -226,7 +226,7 @@
     }
 
     /* Projects section */
-    .projects-header {
+    .projects-header, .writing-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
@@ -235,7 +235,8 @@
       flex-wrap: wrap;
     }
 
-    .projects-header span {
+    .projects-header span,
+    .writing-header span {
       font-size: 13px;
       color: var(--text-muted);
     }
@@ -297,6 +298,7 @@
       border-radius: var(--radius-sm);
       border: 1px solid rgba(156, 163, 175, 0.5);
       color: var(--text-muted);
+      white-space: nowrap;
     }
 
     .repo-link {
@@ -317,6 +319,53 @@
     .repo-desc {
       font-size: 13px;
       color: var(--text-main);
+    }
+
+    /* Writing / Blog */
+    .writing-body {
+      font-size: 14px;
+    }
+
+    .writing-list {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .writing-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      padding: 12px 14px;
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
+    }
+
+    .writing-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(88, 166, 255, 0.7);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.65);
+    }
+
+    .writing-card h3 {
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .writing-card p {
+      font-size: 13px;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .writing-card a {
+      font-size: 12px;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .writing-card a:hover {
+      text-decoration: underline;
     }
 
     /* Contact */
@@ -399,6 +448,7 @@
       <div class="nav-links">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
+        <a href="#writing">Writing</a>
         <a href="#contact">Contact</a>
       </div>
     </nav>
@@ -415,6 +465,7 @@
       <div class="hero-badge-row">
         <span class="badge-pill">Linux Enthusiast</span>
         <span class="badge-pill">Python &amp; Automation</span>
+        <span class="badge-pill">Desktop Tools</span>
         <span class="badge-pill">Creative Writing</span>
       </div>
 
@@ -424,7 +475,7 @@
         </a>
         <span>·</span>
         <a href="https://bybias.com" target="_blank" rel="noopener noreferrer">
-          bybias.com
+          Writing &amp; Blog (bybias.com)
         </a>
       </div>
     </header>
@@ -439,10 +490,10 @@
           I’m an Italian creator living in Germany, passionate about
           <strong>Linux</strong>, <strong>Python</strong>, <strong>automation</strong>,
           <strong>creative writing</strong>, and building simple tools that make everyday life easier.
-          I enjoy experimenting with open-source technologies, scripts, and desktop utilities.
+          I enjoy experimenting with open-source technologies, desktop scripts, and utilities.
         </p>
         <p class="muted" style="margin-top: 6px;">
-          This page showcases some of my repositories, each with a short and clear description.
+          This page showcases selected repositories and my writing space on the web.
         </p>
       </section>
 
@@ -458,7 +509,7 @@
           <article class="repo-card">
             <div class="repo-title-row">
               <div class="repo-name">GeppEmoji</div>
-              <div class="repo-tag">Python · GTK3</div>
+              <div class="repo-tag">Python · GTK3 · Linux</div>
             </div>
             <div class="repo-link">
               <a href="https://github.com/FranzBias/GeppEmoji" target="_blank" rel="noopener noreferrer">
@@ -475,7 +526,7 @@
           <article class="repo-card">
             <div class="repo-title-row">
               <div class="repo-name">email-picker</div>
-              <div class="repo-tag">Python · Tk</div>
+              <div class="repo-tag">Python · Tkinter</div>
             </div>
             <div class="repo-link">
               <a href="https://github.com/FranzBias/email-picker" target="_blank" rel="noopener noreferrer">
@@ -483,8 +534,8 @@
               </a>
             </div>
             <p class="repo-desc">
-              A small utility that lets you pick an email address from a predefined list using a simple GUI.
-              Ideal for quickly copying addresses into other apps.
+              A small utility that lets you pick an email address from a predefined list using a simple
+              Tkinter GUI. Ideal for quickly copying addresses into other apps.
             </p>
           </article>
 
@@ -492,7 +543,7 @@
           <article class="repo-card">
             <div class="repo-title-row">
               <div class="repo-name">change-files-modification-date</div>
-              <div class="repo-tag">Nemo Action</div>
+              <div class="repo-tag">Bash · Nemo Action</div>
             </div>
             <div class="repo-link">
               <a href="https://github.com/FranzBias/change-files-modification-date" target="_blank" rel="noopener noreferrer">
@@ -503,6 +554,45 @@
               A Nemo Action script for Linux Mint that makes it easy to change the modification date of files
               directly from the file manager context menu.
             </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- WRITING / BLOG -->
+      <section id="writing">
+        <div class="writing-header">
+          <h2>✍️ Writing &amp; Blog</h2>
+          <span>Short stories, poetry and personal projects on bybias.com.</span>
+        </div>
+        <div class="writing-body">
+          <p>
+            Besides coding and Linux tools, I love writing short stories, reflections and poetry.
+            My personal website collects various texts in Italian (and sometimes other languages),
+            often mixing real life, imagination and a bit of irony.
+          </p>
+        </div>
+
+        <div class="writing-list">
+          <article class="writing-card">
+            <h3>bybias.com · Main Page</h3>
+            <p>
+              My main hub for experiments, notes, stories and projects. A place where tech, daily life
+              and creative writing often intersect.
+            </p>
+            <a href="https://bybias.com" target="_blank" rel="noopener noreferrer">
+              Visit bybias.com →
+            </a>
+          </article>
+
+          <article class="writing-card">
+            <h3>Short Stories &amp; Thoughts</h3>
+            <p>
+              Selected writings about everyday moments, memories, inner journeys and fictional characters.
+              Sometimes light, sometimes darker – always personal.
+            </p>
+            <a href="https://bybias.com" target="_blank" rel="noopener noreferrer">
+              Read my texts on bybias.com →
+            </a>
           </article>
         </div>
       </section>
@@ -526,7 +616,8 @@
     </main>
 
     <footer>
-      © 2025 FranzBias – Built proudly on <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
+      © 2025 FranzBias – Built proudly on
+      <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
     </footer>
   </div>
 </body>
