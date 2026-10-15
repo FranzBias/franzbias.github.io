@@ -1,624 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>FranzBias Home - GitHub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="author" content="FranzBias (Francesco Bianchi)" />
-  <meta name="description" content="Portfolio of FranzBias – Linux, Python, automation, tools and creative writing." />
-  <link rel="icon" type="image/png" href="imgfittizia.png" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FranzBias · byBias</title>
+  <meta name="description" content="FranzBias / byBias — the code-x.md blog about Linux, Python and the tools I build, and bybias.com for short stories and poems.">
+  <meta property="og:title" content="FranzBias · byBias">
+  <meta property="og:description" content="Code and words, side by side: code-x.md and bybias.com.">
+  <meta property="og:image" content="https://franzbias.github.io/assets/Avatar.png">
+  <link rel="icon" type="image/png" href="assets/Avatar.png">
   <style>
-    /* Global Dark Mode */
     :root {
       color-scheme: dark;
-      --bg: #050509;
-      --card-bg: #111118;
-      --card-border: #272734;
-      --accent: #58a6ff;
-      --accent-soft: rgba(88, 166, 255, 0.15);
-      --text-main: #e0e0e0;
-      --text-muted: #9b9b9b;
-      --divider: #2a2a3a;
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
-      --radius-lg: 18px;
-      --radius-sm: 999px;
+      --bg: #07070c; --card: #111118; --line: #272734; --text: #e4e4ea; --muted: #9b9bab;
+      --blue: #58a6ff; --gold: #d4af37; --green: #3fb950; --r: 18px;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: radial-gradient(circle at top, #161629 0, var(--bg) 40%, #000 100%);
-      color: var(--text-main);
+      background: radial-gradient(circle at 50% -10%, #1b1b33 0, var(--bg) 45%, #000 100%);
+      color: var(--text); min-height: 100vh; line-height: 1.6;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-      min-height: 100vh;
     }
-
-    .page {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 24px 16px 40px;
+    a { color: inherit; }
+    .page { max-width: 960px; margin: 0 auto; padding: 20px 16px 48px; }
+    nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 40px; }
+    .brand { font-weight: 700; letter-spacing: .02em; text-decoration: none; }
+    .langs { display: flex; gap: 6px; }
+    .langs button {
+      background: transparent; color: var(--muted); border: 1px solid var(--line); border-radius: 999px;
+      padding: 4px 12px; font: inherit; font-size: .85rem; cursor: pointer;
     }
-
-    /* Top navigation */
-    .top-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-      gap: 16px;
+    .langs button[aria-pressed="true"] { color: var(--text); border-color: var(--blue); background: rgba(88,166,255,.12); }
+    header { display: flex; align-items: center; gap: 24px; margin-bottom: 48px; flex-wrap: wrap; }
+    header img { width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--line); }
+    h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.15; }
+    .claim { color: var(--muted); font-size: 1.1rem; margin-top: 6px; max-width: 34em; }
+    .duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 48px; }
+    .card {
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--r);
+      padding: 26px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 18px 45px rgba(0,0,0,.5);
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .card.blog { border-top: 3px solid var(--blue); }
+    .card.write { border-top: 3px solid var(--gold); }
+    .card h2 { font-size: 1.4rem; }
+    .card .tag { color: var(--muted); font-size: .9rem; }
+    .card p { color: #c9c9d3; }
+    .go { margin-top: auto; align-self: flex-start; text-decoration: none; font-weight: 600; padding: 8px 16px; border-radius: 999px; }
+    .blog .go { background: rgba(88,166,255,.15); color: var(--blue); }
+    .write .go { background: rgba(212,175,55,.15); color: var(--gold); }
+    .go:hover { filter: brightness(1.25); }
+    h3 { font-size: 1.1rem; margin-bottom: 14px; color: var(--muted); font-weight: 600; }
+    ul.proj { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; }
+    ul.proj a {
+      display: block; text-decoration: none; padding: 12px 14px; border: 1px solid var(--line);
+      border-radius: 12px; background: rgba(17,17,24,.7);
     }
-
-    .brand-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #58a6ff, #a855f7);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: 700;
-      color: #fff;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand-text span:first-child {
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      font-size: 13px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .brand-text span:last-child {
-      font-weight: 600;
-      font-size: 15px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 18px;
-      font-size: 14px;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      position: relative;
-      padding-bottom: 3px;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #58a6ff, #a855f7);
-      transition: width 0.23s ease-out;
-      border-radius: 999px;
-    }
-
-    .nav-links a:hover {
-      color: var(--text-main);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    /* Header / Hero */
-    header.hero {
-      text-align: center;
-      padding: 40px 16px 32px;
-    }
-
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      margin-bottom: 18px;
-      object-fit: cover;
-      border: 3px solid rgba(255, 255, 255, 0.08);
-      box-shadow: var(--shadow-soft);
-      background: radial-gradient(circle at 30% 20%, #58a6ff 0, #111118 40%, #000 100%);
-    }
-
-    h1 {
-      font-size: 32px;
-      margin-bottom: 8px;
-      letter-spacing: 0.03em;
-    }
-
-    .subtitle {
-      font-size: 15px;
-      color: var(--text-muted);
-      max-width: 520px;
-      margin: 0 auto 18px;
-    }
-
-    .hero-badge-row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .badge-pill {
-      padding: 5px 12px;
-      border-radius: var(--radius-sm);
-      border: 1px solid rgba(88, 166, 255, 0.35);
-      background: rgba(15, 23, 42, 0.7);
-      font-size: 12px;
-      color: var(--text-main);
-      backdrop-filter: blur(8px);
-    }
-
-    .hero-links {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      margin-top: 12px;
-      font-size: 14px;
-    }
-
-    .hero-links a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .hero-links a:hover {
-      text-decoration: underline;
-    }
-
-    hr {
-      border: none;
-      border-top: 1px solid var(--divider);
-      margin: 24px 0;
-    }
-
-    main {
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-    }
-
-    section {
-      background: radial-gradient(circle at top left, var(--accent-soft), transparent 60%);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--card-border);
-      padding: 20px 18px 18px;
-      box-shadow: var(--shadow-soft);
-    }
-
-    section h2 {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-
-    section p {
-      font-size: 14px;
-      color: var(--text-main);
-    }
-
-    .muted {
-      color: var(--text-muted);
-      font-size: 13px;
-    }
-
-    /* Projects section */
-    .projects-header, .writing-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 12px;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-    }
-
-    .projects-header span,
-    .writing-header span {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .repo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 14px;
-      margin-top: 8px;
-    }
-
-    .repo-card {
-      background: var(--card-bg);
-      border-radius: 14px;
-      border: 1px solid var(--card-border);
-      padding: 14px 14px 12px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.22s ease-out, box-shadow 0.22s ease-out, border-color 0.22s ease-out, background 0.22s ease-out;
-    }
-
-    .repo-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at top left, rgba(88, 166, 255, 0.12), transparent 55%);
-      opacity: 0;
-      transition: opacity 0.25s ease-out;
-      pointer-events: none;
-    }
-
-    .repo-card:hover {
-      transform: translateY(-4px) scale(1.01);
-      border-color: rgba(88, 166, 255, 0.7);
-      background: linear-gradient(135deg, #12121c, #151525);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.75);
-    }
-
-    .repo-card:hover::before {
-      opacity: 1;
-    }
-
-    .repo-title-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 4px;
-    }
-
-    .repo-name {
-      font-weight: 600;
-      font-size: 15px;
-    }
-
-    .repo-tag {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: var(--radius-sm);
-      border: 1px solid rgba(156, 163, 175, 0.5);
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
-    .repo-link {
-      font-size: 12px;
-      margin-bottom: 6px;
-      word-break: break-all;
-    }
-
-    .repo-link a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .repo-link a:hover {
-      text-decoration: underline;
-    }
-
-    .repo-desc {
-      font-size: 13px;
-      color: var(--text-main);
-    }
-
-    /* Writing / Blog */
-    .writing-body {
-      font-size: 14px;
-    }
-
-    .writing-list {
-      margin-top: 10px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 14px;
-    }
-
-    .writing-card {
-      background: var(--card-bg);
-      border-radius: 14px;
-      border: 1px solid var(--card-border);
-      padding: 12px 14px;
-      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
-    }
-
-    .writing-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(88, 166, 255, 0.7);
-      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.65);
-    }
-
-    .writing-card h3 {
-      font-size: 15px;
-      margin-bottom: 4px;
-    }
-
-    .writing-card p {
-      font-size: 13px;
-      color: var(--text-main);
-      margin-bottom: 6px;
-    }
-
-    .writing-card a {
-      font-size: 12px;
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .writing-card a:hover {
-      text-decoration: underline;
-    }
-
-    /* Contact */
-    .contact-links {
-      margin-top: 8px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      font-size: 14px;
-    }
-
-    .chip-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--card-border);
-      background: rgba(12, 12, 20, 0.9);
-      text-decoration: none;
-      color: var(--text-main);
-      font-size: 13px;
-      transition: border-color 0.2s ease-out, background 0.2s ease-out, transform 0.2s ease-out;
-    }
-
-    .chip-link:hover {
-      border-color: rgba(88, 166, 255, 0.7);
-      background: rgba(15, 23, 42, 0.97);
-      transform: translateY(-1px);
-    }
-
-    footer {
-      text-align: center;
-      color: var(--text-muted);
-      margin-top: 26px;
-      padding-top: 16px;
-      border-top: 1px solid var(--divider);
-      font-size: 12px;
-    }
-
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* Smooth scroll */
-    html {
-      scroll-behavior: smooth;
-    }
-
-    @media (max-width: 640px) {
-      header.hero {
-        padding-top: 26px;
-      }
-      h1 {
-        font-size: 26px;
-      }
-      .nav-links {
-        font-size: 13px;
-        gap: 12px;
-      }
-    }
+    ul.proj a:hover { border-color: var(--green); }
+    ul.proj b { display: block; }
+    ul.proj span { color: var(--muted); font-size: .88rem; }
+    footer { margin-top: 48px; color: var(--muted); font-size: .85rem; text-align: center; }
+    [data-l] { display: none; }
+    html[lang="en"] [data-l="en"], html[lang="it"] [data-l="it"], html[lang="de"] [data-l="de"] { display: revert; }
   </style>
 </head>
-
 <body>
-  <div class="page">
-    <nav class="top-nav">
-      <div class="brand">
-        <div class="brand-logo">FB</div>
-        <div class="brand-text">
-          <span>Portfolio</span>
-          <span>FranzBias</span>
-        </div>
-      </div>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#writing">Writing</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </nav>
+<div class="page">
+  <nav>
+    <a class="brand" href="https://github.com/FranzBias">FranzBias · byBias</a>
+    <div class="langs" role="group" aria-label="Language">
+      <button type="button" data-set="en">EN</button>
+      <button type="button" data-set="it">IT</button>
+      <button type="button" data-set="de">DE</button>
+    </div>
+  </nav>
 
-    <header class="hero">
-      <!-- Avatar: usa il tuo file reale, es. assets/Avatar.png -->
-      <img src="assets/Avatar.png" alt="Avatar" class="avatar" />
-      <h1>FranzBias – Developer &amp; Creator</h1>
-      <p class="subtitle">
-        Welcome to my personal GitHub homepage.<br />
-        A curated collection of my projects, tools, and experiments.
+  <header>
+    <img src="assets/Avatar.png" alt="byBias avatar">
+    <div>
+      <h1>
+        <span data-l="en">Code and words, side by side.</span>
+        <span data-l="it">Codice e parole, uno accanto all'altro.</span>
+        <span data-l="de">Code und Worte, Seite an Seite.</span>
+      </h1>
+      <p class="claim">
+        <span data-l="en">I build small Linux tools and tell the story behind them. And I write things that have nothing to do with code.</span>
+        <span data-l="it">Costruisco piccoli strumenti per Linux e racconto la storia che c'è dietro. E scrivo cose che col codice non c'entrano niente.</span>
+        <span data-l="de">Ich baue kleine Linux-Werkzeuge und erzähle die Geschichte dahinter. Und ich schreibe Dinge, die mit Code nichts zu tun haben.</span>
       </p>
+    </div>
+  </header>
 
-      <div class="hero-badge-row">
-        <span class="badge-pill">Linux Enthusiast</span>
-        <span class="badge-pill">Python &amp; Automation</span>
-        <span class="badge-pill">Desktop Tools</span>
-        <span class="badge-pill">Creative Writing</span>
-      </div>
+  <section class="duo">
+    <article class="card blog">
+      <div class="tag">📝 Blog · Linux · Python · Web</div>
+      <h2>code-x.md</h2>
+      <p data-l="en">Everything I build with code, told honestly: step-by-step tutorials, complete projects, quick snippets — and the doubts, mistakes and detours along the way. In Italian, with English and German translations.</p>
+      <p data-l="it">Tutto quello che costruisco col codice, raccontato con onestà: tutorial passo-passo, progetti completi, snippet veloci — e i dubbi, gli errori e le deviazioni lungo la strada. In italiano, con traduzioni in inglese e tedesco.</p>
+      <p data-l="de">Alles, was ich mit Code baue, ehrlich erzählt: Schritt-für-Schritt-Anleitungen, komplette Projekte, kurze Snippets – samt Zweifeln, Fehlern und Umwegen. Auf Italienisch, mit englischen und deutschen Übersetzungen.</p>
+      <a class="go" href="https://code-x.md">
+        <span data-l="en">Read the blog →</span><span data-l="it">Leggi il blog →</span><span data-l="de">Zum Blog →</span>
+      </a>
+    </article>
 
-      <div class="hero-links">
-        <a href="https://github.com/FranzBias" target="_blank" rel="noopener noreferrer">
-          GitHub Profile
-        </a>
-        <span>·</span>
-        <a href="https://bybias.com" target="_blank" rel="noopener noreferrer">
-          Writing &amp; Blog (bybias.com)
-        </a>
-      </div>
-    </header>
+    <article class="card write">
+      <div class="tag">✒️ Stories · Poems</div>
+      <h2>bybias.com</h2>
+      <p data-l="en">Short stories, poems and reflections — the quieter half of byBias, where everyday moments meet imagination and a little irony.</p>
+      <p data-l="it">Racconti brevi, poesie e riflessioni — la metà più silenziosa di byBias, dove i momenti di tutti i giorni incontrano l'immaginazione e un po' di ironia.</p>
+      <p data-l="de">Kurzgeschichten, Gedichte und Gedanken – die leisere Hälfte von byBias, wo der Alltag auf Fantasie und ein wenig Ironie trifft.</p>
+      <a class="go" href="https://bybias.com">
+        <span data-l="en">Read the texts →</span><span data-l="it">Leggi i testi →</span><span data-l="de">Zu den Texten →</span>
+      </a>
+    </article>
+  </section>
 
-    <hr />
+  <section>
+    <h3><span data-l="en">🧰 Projects on GitHub</span><span data-l="it">🧰 Progetti su GitHub</span><span data-l="de">🧰 Projekte auf GitHub</span></h3>
+    <ul class="proj">
+      <li><a href="https://github.com/FranzBias/Brezza"><b>Brezza</b><span>Collapsible system tray for the Cinnamon panel</span></a></li>
+      <li><a href="https://github.com/FranzBias/GeppEmoji"><b>GeppEmoji</b><span>Lightweight emoji picker for Linux · Python + GTK3</span></a></li>
+      <li><a href="https://github.com/FranzBias/Duplicate-Finder"><b>Duplicate-Finder</b><span>Find duplicate files, non-destructively · PyQt5</span></a></li>
+      <li><a href="https://github.com/FranzBias/App-Analyzer-Installer"><b>App-Analyzer-Installer</b><span>Analyze installed apps, recreate your setup · Tkinter</span></a></li>
+      <li><a href="https://github.com/FranzBias/byBias-Icons-Paket"><b>byBias-Icons-Paket</b><span>Manage a personal icon collection · GTK</span></a></li>
+      <li><a href="https://github.com/FranzBias/Own-Icon-Theme-In-Cinnamon"><b>Own-Icon-Theme-In-Cinnamon</b><span>Create your own icon theme in Cinnamon</span></a></li>
+      <li><a href="https://github.com/FranzBias/Change-files-modification-date"><b>Change-files-modification-date</b><span>Nemo Action · also in the official Cinnamon Spices</span></a></li>
+      <li><a href="https://github.com/FranzBias/email-picker"><b>email-picker</b><span>Pick an email address, copy it to the clipboard</span></a></li>
+    </ul>
+  </section>
 
-    <main>
-      <!-- ABOUT -->
-      <section id="about">
-        <h2>👤 About Me</h2>
-        <p>
-          I’m an Italian creator living in Germany, passionate about
-          <strong>Linux</strong>, <strong>Python</strong>, <strong>automation</strong>,
-          <strong>creative writing</strong>, and building simple tools that make everyday life easier.
-          I enjoy experimenting with open-source technologies, desktop scripts, and utilities.
-        </p>
-        <p class="muted" style="margin-top: 6px;">
-          This page showcases selected repositories and my writing space on the web.
-        </p>
-      </section>
+  <footer>
+    <a href="https://github.com/FranzBias">GitHub @FranzBias</a> · <a href="https://code-x.md">code-x.md</a> · <a href="https://bybias.com">bybias.com</a><br>
+    <span data-l="en">Made with ❤ on Linux Mint</span><span data-l="it">Fatto con ❤ su Linux Mint</span><span data-l="de">Mit ❤ auf Linux Mint gemacht</span>
+  </footer>
+</div>
 
-      <!-- PROJECTS -->
-      <section id="projects">
-        <div class="projects-header">
-          <h2>📁 My Projects</h2>
-          <span>Selected repositories from my GitHub account.</span>
-        </div>
-
-        <div class="repo-grid">
-          <!-- GeppEmoji -->
-          <article class="repo-card">
-            <div class="repo-title-row">
-              <div class="repo-name">GeppEmoji</div>
-              <div class="repo-tag">Python · GTK3 · Linux</div>
-            </div>
-            <div class="repo-link">
-              <a href="https://github.com/FranzBias/GeppEmoji" target="_blank" rel="noopener noreferrer">
-                github.com/FranzBias/GeppEmoji
-              </a>
-            </div>
-            <p class="repo-desc">
-              A lightweight desktop Emoji Picker written in Python + GTK3, designed for Linux desktops.
-              Practical, fast, and focused on everyday productivity.
-            </p>
-          </article>
-
-          <!-- email-picker -->
-          <article class="repo-card">
-            <div class="repo-title-row">
-              <div class="repo-name">email-picker</div>
-              <div class="repo-tag">Python · Tkinter</div>
-            </div>
-            <div class="repo-link">
-              <a href="https://github.com/FranzBias/email-picker" target="_blank" rel="noopener noreferrer">
-                github.com/FranzBias/email-picker
-              </a>
-            </div>
-            <p class="repo-desc">
-              A small utility that lets you pick an email address from a predefined list using a simple
-              Tkinter GUI. Ideal for quickly copying addresses into other apps.
-            </p>
-          </article>
-
-          <!-- Change-files-modification-date -->
-          <article class="repo-card">
-            <div class="repo-title-row">
-              <div class="repo-name">change-files-modification-date</div>
-              <div class="repo-tag">Bash · Nemo Action</div>
-            </div>
-            <div class="repo-link">
-              <a href="https://github.com/FranzBias/change-files-modification-date" target="_blank" rel="noopener noreferrer">
-                github.com/FranzBias/change-files-modification-date
-              </a>
-            </div>
-            <p class="repo-desc">
-              A Nemo Action script for Linux Mint that makes it easy to change the modification date of files
-              directly from the file manager context menu.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <!-- WRITING / BLOG -->
-      <section id="writing">
-        <div class="writing-header">
-          <h2>✍️ Writing &amp; Blog</h2>
-          <span>Short stories, poetry and personal projects on bybias.com.</span>
-        </div>
-        <div class="writing-body">
-          <p>
-            Besides coding and Linux tools, I love writing short stories, reflections and poetry.
-            My personal website collects various texts in Italian (and sometimes other languages),
-            often mixing real life, imagination and a bit of irony.
-          </p>
-        </div>
-
-        <div class="writing-list">
-          <article class="writing-card">
-            <h3>bybias.com · Main Page</h3>
-            <p>
-              My main hub for experiments, notes, stories and projects. A place where tech, daily life
-              and creative writing often intersect.
-            </p>
-            <a href="https://bybias.com" target="_blank" rel="noopener noreferrer">
-              Visit bybias.com →
-            </a>
-          </article>
-
-          <article class="writing-card">
-            <h3>Short Stories &amp; Thoughts</h3>
-            <p>
-              Selected writings about everyday moments, memories, inner journeys and fictional characters.
-              Sometimes light, sometimes darker – always personal.
-            </p>
-            <a href="https://bybias.com" target="_blank" rel="noopener noreferrer">
-              Read my texts on bybias.com →
-            </a>
-          </article>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      <section id="contact">
-        <h2>📬 Contact</h2>
-        <p>
-          If you want to connect, collaborate or just say hi, you can reach me via GitHub
-          or visit my website.
-        </p>
-        <div class="contact-links">
-          <a class="chip-link" href="https://github.com/FranzBias" target="_blank" rel="noopener noreferrer">
-            <span>🐙</span><span>GitHub – @FranzBias</span>
-          </a>
-          <a class="chip-link" href="https://www.bybias.com" target="_blank" rel="noopener noreferrer">
-            <span>🌐</span><span>bybias.com</span>
-          </a>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      © 2025 FranzBias – Built proudly on
-      <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
-    </footer>
-  </div>
+<script>
+  // Lingua: scelta salvata > lingua del browser > inglese. localStorage può mancare: try/catch.
+  (function () {
+    var ok = ["en", "it", "de"];
+    function set(l) {
+      document.documentElement.lang = l;
+      document.querySelectorAll(".langs button").forEach(function (b) {
+        b.setAttribute("aria-pressed", b.dataset.set === l ? "true" : "false");
+      });
+      try { localStorage.setItem("lang", l); } catch (e) {}
+    }
+    var l = null;
+    try { l = localStorage.getItem("lang"); } catch (e) {}
+    if (ok.indexOf(l) < 0) { l = (navigator.language || "en").slice(0, 2).toLowerCase(); }
+    set(ok.indexOf(l) < 0 ? "en" : l);
+    document.querySelectorAll(".langs button").forEach(function (b) {
+      b.addEventListener("click", function () { set(b.dataset.set); });
+    });
+  })();
+</script>
 </body>
 </html>
